@@ -7,14 +7,14 @@ pub struct UpdateArgs {
     pub value: u32
 }
 
-pub enum CounterInstruction {
+pub enum CounterInstructions {
     Increment,
     Decrement,
     Update(UpdateArgs),
     Reset
 }
 
-impl CounterInstruction {
+impl CounterInstructions {
     pub fn unpack(input: &[u8]) -> Result<Self, ProgramError> {
         let (&variant, rest) = input.split_first().ok_or(ProgramError::InvalidInstructionData)?;
         Ok(match variant {
